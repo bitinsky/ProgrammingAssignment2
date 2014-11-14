@@ -1,7 +1,14 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Matrix inversion is a computation that may take a long time.
+## If the matrix is static then it doesn't make sense to repeatedly
+## evaluate it.  Utilizing lexical scoping it may be possible to 
+## cache the evaluation and store if for the next time.
 
-## Write a short comment describing this function
+## This first function creates a vector of four functions:
+##    set the matrix
+##    get the matrix
+##    set the inverse
+##    get the inverse
+
 
 makeCacheMatrix <- function(x = matrix()) {
 
@@ -21,7 +28,11 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## This function first checks if the inverse has already
+## been evaluated. If so then it retrieves the answer 
+## from cached data in the containing environment.
+## If the answer has not yet been solved, then the routine 
+## will evaulate and cache the answer. 
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
