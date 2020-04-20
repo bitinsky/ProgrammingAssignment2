@@ -1,0 +1,47 @@
+---
+title: "Test"
+author: "Kevin Bitinsky"
+date: "19/04/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Summary
+This is a test of lexical scoping assignment.
+
+```{r include, echo = TRUE, warning=FALSE, message=FALSE}
+library(matlib)
+source("cachematrix.R")
+```
+
+Create a random matrix:
+```{r creation}
+set.seed(1)
+mat <- matrix(rnorm(9), nrow = 3, ncol = 3)
+print(mat)
+```
+
+Use the matrix as input to the cache matrix. 
+```{r cachmatrix}
+system.time(m <- makeCacheMatrix(mat))
+system.time(inv1 <- cacheSolve(m))
+print(inv1)
+```
+
+Use matlib to calculate inverse matrix
+```{r matlib}
+system.time(inv2 <- inv(mat))
+print(inv2)
+```
+
+Is it the same output?
+``` {r test}
+identical(round(inv1, 3), round(inv2, 3))
+```
+
+
